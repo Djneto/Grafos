@@ -1,4 +1,6 @@
 /*
+Exercício aula 01 - 29/08/2022
+
 Faça um programa que receba do usuário N pares de valores, onde cada PAR representa uma aresta
 bidirecional entre cada valor do par.
 Mostre uma matriz de adjacência que represente esse grafo
@@ -36,10 +38,22 @@ void *aloca(size_t sz){
 void addLink(lista *Lista, int num, int nam){
     while(Lista != NULL){
         if(Lista->numero == nam){
-            link *novo = aloca(sizeof(*novo));
-            novo->numero = num;
-            novo->prox = Lista->par;
-            Lista->par = novo;
+            link *LINK = Lista->par;
+            int f = 0;
+            while(LINK != NULL){
+                if(LINK->numero == num){
+                    f++;
+                }
+                LINK = LINK->prox;
+            }
+            if(f == 0){
+                link *novo = aloca(sizeof(*novo));
+                novo->numero = num;
+                novo->prox = Lista->par;
+                Lista->par = novo;
+            } else {
+                return;
+            }
         }
         Lista = Lista->prox;
     }
